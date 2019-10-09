@@ -1,0 +1,329 @@
+### ################################################################################################################################ 
+## This script was created for the workshop: Processing Textual Data
+## The code is broken into modules that complement examples in the workshop powerpoint.
+#################################################################################################################################### 
+
+####################### Module One: Introduction to R.############################################################################## 
+	## To assign an object in R use an arrow (<-). In this case we are assigning the Dr. Seues tittles to an object called example1
+		example1<-c("The Cat in the Hat","Green Eggs and Ham")
+		## to see the contents of what is contained in example 1, you must type it directly into the command line
+		example1
+	## In this example we make an object called "genders". The c means combine the two terms that are seperated by the comma. The terms must be in quotes because they are characters, not objects. 
+		genders<-c("female","male")
+		genders
+	## You try
+	## First, make two R objects, which are named veggies and fruit
+	 	veggies<-c("potato", "carrot", "kale" )
+		fruit<-c("orange", "apple", "pear")
+		# Combine the two R objects by using no quotation marks
+		c(veggies, fruit)
+		#Combine the words veggies and fruit when using quotation makrs
+	 	c("veggies", "fruit")
+	##To see all the objects in your workspace
+ 		ls()
+		objects()
+	## Remove the object example 1. Unlike with c(), this time the R object needs to be in quotes
+		rm("example1")
+		objects() #note that it is no longer in the workspace.
+	## to save the whole workspace use save.image
+		save.image("workspace.Rdata")
+	## to get the workspace back
+		load("workspace.Rdata")
+	## Look at the working directory
+		getwd()
+	## Set the working directory to the rworkshop folder on the desktop. Note you will need to change the directory to whatever directory you are working in (probably not the name of the instructor!)
+		setwd("/Users/michellejones/Desktop/R.Workshop")
+
+
+	## Logical Tests
+		"red" == "red" # Does red equal red?
+		"red" == "blue" # Is red the same as blue?
+		"red" != "red" # Is red not the same as red?
+		"red" != "blue" #  Is red not the same as blue?
+		
+	## help functions can be brought up by typing "help" around the function name
+		help(length) #pull up the help file for the length function
+
+	##Now we can use the length function to count occurences for us
+	#First, create two vectors of colors and save them in the object colors_example1 and colors_example2
+			colors_example1<-c("red","red","blue")
+			colors_example2<-c("red","blue","blue")
+			# Then use the length command to find the number of times each color occurs and save them in separate objects
+			num_red1<-length(which(colors_example1=="red")) 
+			num_red2<-length(which(colors_example2=="red")) 
+			# Use logical statements to see how the number of times red occurs in object 1 and object 2 differ
+			num_red1>num_red2 # Are there more occurences of red in the first object than the second?
+			num_red1<num_red2 # Are there less occurences of red in the first object than the second?
+			num_red1>=num_red2 # Are the number of occurences of red in the first object greater than or equal to the number of occurences of red in the second object
+			num_red1<=num_red2 # Are the number of occurences of red in the first object less than or equal to the number of occurences of red in the second object
+
+##################### Module Two: Data structure, importing data and exporting data ###########################################################################################
+	## Data Classes
+	## Create three vectors, x, y, u that have different data classes
+	x <- c(1, 2, 3, 4, 5)  
+	y <- c("A", "B", "C", "D")
+	u <- c(TRUE, FALSE, FALSE, TRUE)
+	### Check what class they are by using the class function
+	class(x) # numeric
+	class(y) # character
+	class(u) # logical
+	## Or ask if an object is from a specific class using the is function
+	x<- c("The", "sun", "is", "out")
+	is.numeric(x)
+	is.character(x)
+	is.factor(x)
+	#R convers numbers in vectors into characters when combined with letters
+	c(1,2,"boy","girl")
+	is.numeric(	c(1,2,"boy","girl"))
+	## Example of subsetting lists
+		#Create 3 objects to make into a list
+		mat<-matrix(1:25, nrow=5, ncol=5)
+		number<-c(1:10) 
+		sex<-c("male","female")
+		#make a list with named components
+		example_list1 <- list(mat=mat, number=number, sex=sex)
+		#make alist with unnamed components
+		example_list2 <- list(mat, number, sex)
+		#access the matrix in example_list1
+		example_list1$mat
+		example_list1[[1]]
+		## In example_list2 you get an error when trying to use the $ sign
+		example_list2$mat
+		##so you must use bracket indexing
+		example_list2[[1]]
+		## To get the 3rd row, 2nd colum entry of the matrix in component one:
+		example_list2[[1]][3,2]
+	#Concept Check
+	#The entire second row of example_list2
+	row_2<-example_list2[[1]][2,]	
+	#The entire 3rd colum of example_list2
+	colum_3<-example_list2[[1]][,3]
+	#The second entry of the second component of example_list1:
+	example_list1
+	## Use the scan function to read in all of the Jane Austen Novels. Make each entry in the data vector one line of text with sep ="\n", which meansline break. 
+	AusNovels<-scan("AustenNovels.txt", what="character",sep="\n")
+	head(AusNovels) #see the first few vector entries
+	tail(AusNovels) #see the last few data entries
+	
+	## Your turn - scan in the moby dick text
+	moby<-scan("mobydick.txt", what="character",sep="\n")
+	head(moby)
+	tail(moby)
+	
+	### Subset the Jane Austen Novels into individual books
+	## Step 1: Find the line numbers where each novel starts by using the which function. The functions included in this
+	# file include: SENSE AND SENSIBILITY, PRIDE AND PREJUDICE, EMMA, MANSFIELD PARK, NORTHANGER ABBEY, Persuasion
+		PP_start<- which(AusNovels=="PRIDE AND PREJUDICE")
+		SS_start<-which(AusNovels=="SENSE AND SENSIBILITY")
+		E_start<- which(AusNovels=="EMMA")
+		MP_start<- which(AusNovels=="MANSFIELD PARK")
+		NA_start<- which(AusNovels=="NORTHANGER ABBEY")
+		P_start<- which(AusNovels=="Persuasion")
+	## Make a vector that has the names of each novel. We want the names to be labels, or character strings, so keep them in quotations.
+		novel_names<-c("PP_start","SS_start","E_start","MP_start","NA_start","P_start")
+	## Save the starting line numbers for an index by combining them into a single vector. In this case we want the values within the R objects, so no quotes.
+		all.starts<-c(PP_start,SS_start,E_start,MP_start,NA_start,P_start)
+	# Now we want to label the starting line numbers with the novels they correlate to, which means we have two classes of data. This forces us to use a dataframe.
+		seperation_info<-as.data.frame(cbind(novel_names,all.starts))
+	##Step two: We can use the order function to rearrange our table in the order of which the books appear in the data file
+		seperation_info<-seperation_info[order(seperation_info[,2]),]
+		seperation_info
+	## Step three: Now we use these indicies to seperate out each book and put it in its own object. The "a:b" means take all the entries between a and b
+		PP<-AusNovels[1:(SS_start-1)] #note we subtract one from the beginning of the next book because we want everything up until that first book starts
+	## We can check how we seperated the books using the head and tail function again, for example using Pride and Predjudice
+		head(PP)
+		tail(PP)
+		SS<-AusNovels[SS_start:(MP_start-1)]
+		MP<-AusNovels[MP_start:(E_start-1)]
+		E<-AusNovels[E_start:(NA_start-1)]
+		NA_novel<-AusNovels[NA_start:(P_start-1)] # here we had to use the name NA_novel versus just NA because NA means "blank" or "missing information" in R
+		P<-AusNovels[P_start:length(AusNovels)]
+		
+	##Seperate out the text from the metadata of moby dick
+		head(moby)
+		tail(moby)
+		start_md<- which(moby == "CHAPTER 1. Loomings.")
+		end_md<-which(moby == "orphan.")
+		text_md<-moby[start_md:end_md]
+
+	## The grep function allows you to have an imperfect match. The "^" character says "the line starts with" 
+	grep("^Chapter",PP)  #Go through the object PP and find the lines starting with chapter
+	# We can double check by picking the index of the 45th entry and seeing if it matches the line “Chapter 45”
+	PP[7249] #7249 is the line number in the 45th entry from the command above
+	
+	## Save a work as it's own text file by making a connection from R to the working directory and writing out the lines of the text
+	fileConn<-file("SenseSensability.txt") # make a file called "Sense and Sensability"
+	writeLines(SS, fileConn) #Take all the entries from R object SS and use the file connection to write them out as lines of characters in the text file
+	close(fileConn) #close the connection
+
+	## Concept check - Moby Dick 
+	## Export the extracted moby dick text as a new file without the metadate. We already created the object - it was  named text_md
+	save(text_md, file="mobydick.Rdata")
+	## Export to working directory as text file
+	fileConn<-file("moby_dick_metafree.txt") # make a file called "Sense and Sensability"
+	writeLines(text_md, fileConn) #Take all the entries from R object SS and use the file connection to write them out as lines of characters in the text file
+	close(fileConn) #close the connection
+	##Now read it back into R using the scan function
+	moby2<-scan("moby_dick_metafree.txt", what="character",sep="\n")
+	#double check
+	head(moby2)
+
+
+	
+
+############### Module 3 - simple textual analysis ######################
+	## Prepare your imported text files into the right shape for analysis
+	# Combine all the lines of the analysis unit into a single character string using the paste function
+	Full_PP <-paste(PP, collapse=" ")
+	#convert all the upper calse letters to lower case letters so that things such as "the" and "The" are treated as the same word
+	Full_lc_PP<-tolower(Full_PP) # this is a single long string with one entry, we still need to break it up into the individual words, we've collapsed the lines, but not solved the problem of getting to words
+	PP_words<-unlist(strsplit(Full_lc_PP,"[^a-z0-9]")) ## Go into the object Full_lc_PP and extract only the words (i.e strsplit), then save the result as entries within a vector 
+	PP_no_punc<-PP_words[which(PP_words!="")] ## go into PP_words and take only the values that are not equal to "", then save them in the object PP_no_punc
+	
+	## Concept check - do this with moby dick
+	full_md<-paste(text_md, collapse= " ")
+	full_lc_md<-tolower(text_md)
+	md_words<-unlist(strsplit(full_lc_md,"[^a-z0-9]"))
+	md_no_punc<-md_words[which(md_words!="")]
+
+	## Determine the number of unique words in Pride and Predjudice
+	length(unique(PP_no_punc))
+	## To determine the word frequencies use the table function
+	table(PP_no_punc) #make a contingency table
+	#The sort function can be used to make the table easier to interpret
+	ctable_PP<-sort(table(PP_no_punc),decreasing=TRUE)
+	# We can convert the table into a dataframe so that we can add more information to it
+	PP_data<-as.data.frame(ctable_PP)
+	head(PP_data)
+	PP_data$numchar<-nchar(rownames(PP_data)) #here we are using the function nchar() to count the number of letters in each of the row names (i.e words used in the book)
+	colnames(PP_data) #this shows you the column names of our data frame
+	head(PP_data)
+
+
+	## Concept check
+	md_data<-sort(table(md_no_punc),decreasing=TRUE)
+	md_data<-as.data.frame(md_data)
+	md_data$numchar<-nchar(rownames(md_data)) 
+	head(md_data)
+
+	#Are more complex words used less frequently?
+	plot(PP_data[,2],PP_data[,1],bty="l",xlab="word length",ylab="word freq",main="Word Freq vs Length in PP")
+	#Are more complex words used less frequently?
+	plot(PP_data[,2],PP_data[,1],pch="",bty="l",xlab="word length",ylab="word freq",main="Word Freq vs Length in PP")
+	text(PP_data[,2],(PP_data[,1]),labels=rownames(PP_data),cex=1)
+
+	## What if we want to see the number of occurences of one specific word?
+	length(PP_no_punc[PP_no_punc=="love"])
+	length(PP_no_punc[PP_no_punc=="hate"])
+
+	## Concept check
+	## Turn Moby dick into a sorted contingency table
+	ctable_md<-sort(table(md_no_punc),decreasing=TRUE)
+	## Turn the contingenct table to a data frame
+	md_data<-as.data.frame(ctable_md)
+	## Add a column with the number of chacters in each word
+	md_data$numchar<-nchar(rownames(md_data)) 
+	
+	# How do you exclude words from you analysis?
+	#exclude the word "the" from your data table using the logical not equal to (!=)
+	PP_data_nothe<-PP_data[rownames(PP_data)!="the",]
+	# exclude the word "the" before making the data table
+	PP_no_punc_no_the<-PP_no_punc[PP_no_punc!="the"]
+	length(PP_no_punc) # see how many words were there before removing the
+	length(PP_no_punc_no_the) #see how many words are there now, which is the same as PP_data[1,]
+	122877-118546 # this is equivalent to the number of "the"s
+
+
+	##Find the relative frequency of female pronouns to make pronouns.
+	Female_pros<-PP_data[rownames(PP_data)=="her"|rownames(PP_data)=="she"|rownames(PP_data)=="hers",] #in this script note that the symbol | means "or" The comand tells R to go into PP and extract the rows with any of the names seperated by the "|"
+	Male_pros<-PP_data[rownames(PP_data)=="him"|rownames(PP_data)=="he"|rownames(PP_data)=="his",]
+	#to get the percents divide the frequencies by one another
+	sum(Female_pros$ctable_PP)/sum(Male_pros$ctable_PP)
+
+   #Concept CheckNow do the same for moby dick
+	 Female_pros<-md_data[rownames(md_data)=="her"|rownames(md_data)=="she"|rownames(md_data)=="hers",]
+ 	 Male_pros<-md_data[rownames(md_data)=="him"|rownames(md_data)=="he"|rownames(md_data)=="his",]
+	 sum(Female_pros$ctable_md)/sum(Male_pros$ctable_md)
+
+	## Dispersion plots
+	#now we're looking over the course of the novel 
+	novel_time_PP_index<-seq(from=1,to=length(PP_no_punc))
+	novel_time_PP<-rep(0,length(PP_no_punc))
+	novel_time_PP[which(PP_no_punc=="darcy")]=1
+	plot(novel_time_PP_index,novel_time_PP,type="l",main="Dispersion Plot of 'Darcy' in Pride and Predjudice",xlab="Novel Time",ylab="Darcy")
+
+	#Concept Check - make a dispersion plot of "whale in moby dick
+	novel_time_md_index2<-seq(from=1,to=length(md_no_punc))
+	novel_time_md2<-rep(0,length(md_no_punc))
+	novel_time_md2[which(md_no_punc=="whale")]=1
+	plot(novel_time_md_index2,novel_time_md2,type="l",main="Dispersion Plot of 'whale' in Moby Dick",xlab="Novel Time",ylab="whale")
+
+	#Bonus code - this will make plots by chapters within the book. This was not included in our workshop, but run it and see if you can figure out how it runs
+			chapter_starts<-grep("^Chapter",PP) 
+			chapter_ends<-chapter_starts[2:length(chapter_starts)]-1
+			all_chapters_PP<-list() #make a place to store the results of the loop
+			for (i in 1:(length(chapter_starts)-1)) # this says how many times the loop will run and assigns the index letter - in this case i
+			{	
+				chapter_lines<-PP[chapter_starts[i]:chapter_ends[i]]
+				chapter_words_all<-tolower(paste(chapter_lines,collapse=" "))
+				chapter_words_split<-unlist(strsplit(chapter_words_all, "\\W"))
+				chapter_words_no_punc<-chapter_words_split[which(chapter_words_split!=" ")]
+
+				chapter_words_ctable<-sort(table(chapter_words_no_punc),decreasing=TRUE)
+				chapter_words_data<-as.data.frame(chapter_words_ctable)
+				chapter_words_data$words<-rownames(chapter_words_data)
+				chapter_words_data$freq<-chapter_words_data$chapter_words_ctable/sum(chapter_words_ctable)*100
+				all_chapters_PP[[i]]<-chapter_words_data
+
+			}
+		
+			chapter_freq<-rep(0,60)
+			for (i in 1:60)
+			{
+			if(length(which(all_chapters_PP[[i]]$words=="darcy"))==1){
+			
+				row_index<-which(all_chapters_PP[[i]]$words=="darcy")
+				chapter_freq[i]<-all_chapters_PP[[i]]$freq[row_index]
+				}
+			}
+			plot(1:60,chapter_freq, type="h",main="Relative Frequency of 'Darcy' by chapter",xlab="Chapter",ylab="Freq of 'Darcy'")
+
+
+
+
+### Module 5 - Packages##
+install.packages("tm")
+library("tm")
+help(package="tm")
+## First open up a couple of the functions you might be interested in using, such as removePunc
+# and/or termFreq from the help file to see how the function works
+## Both require an input of class"text document" 
+## Working backwards, lets open the function PlainTextDocument to see what this requires
+help(PlainTextDocument)
+## This input is a single character vector with the entire text
+## So we can use our full_md object we created earlier - open it as a refresher
+full_md
+## Now we can apply the PlainText Document function to full_md and save the result as an object
+md_tm_example<-PlainTextDocument(full_md)
+## note the class has now changed
+class(md_tm_example)
+class(full_md)
+## Now that we have the correct classed object, we can start using some of these functions
+removePunctuation(md_tm_example)
+termFreq(md_tm_example)
+#Going back to the help file we see that we can often add arguments to minimize coding steps
+## Let's add a control list to this function
+ctrl<-list(removePunctuation = list(preserve_intra_word_dashes = TRUE), # Now we'll remove the punctuation except for hyphenated words
+           stopwords=TRUE,
+           wordLengths = c(4, Inf)) #now we will only look at words of length greater than 4
+
+termFreq(md_tm_example, control=ctrl)
+#save the output into an object:
+example<-termFreq(md_tm_example, control=ctrl)
+#Convert the object into the more familiar looking dataframe
+data.frame(example)
+## 
+
+
+
+
