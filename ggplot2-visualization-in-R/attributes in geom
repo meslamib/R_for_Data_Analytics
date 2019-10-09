@@ -1,0 +1,13 @@
+# Variables in a data frame are mapped to aesthetics in aes(). (e.g. aes(col = cyl)) within ggplot(). Visual elements are set by attributes in specific geom layers 
+
+
+# Expand to draw points with alpha 0.5
+ggplot(mtcars, aes(x = wt, y = mpg, fill = cyl)) + geom_point(alpha=0.5)
+
+  
+# Expand to draw points with shape 24 and color yellow
+ggplot(mtcars, aes(x = wt, y = mpg, fill = cyl)) + geom_point(shape=24, col='yellow')
+
+  
+# Expand to draw text with label rownames(mtcars) and color red
+ggplot(mtcars, aes(x = wt, y = mpg, fill = cyl)) + geom_text(label=rownames(mtcars), col='red') 
