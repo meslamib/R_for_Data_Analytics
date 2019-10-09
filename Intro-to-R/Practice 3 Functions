@@ -1,0 +1,37 @@
+# logs is available in your workspace
+
+# Call max() on timestamps
+max(timestamps)
+
+# What is the date of the latest timestamp?
+as.Date(max(timestamps))
+
+
+# A faulty version of timestamps is available in your workspace
+
+# Print out timestamps
+print(timestamps)
+
+# Call max() on timestamps, no additional arguments
+max(timestamps)
+
+# Call max() on timestamps, specify na.rm
+max(timestamps, na.rm = TRUE)
+
+
+# logs is available in your workspace
+
+# Adapt the extract_info() function.
+extract_info <- function(x, property= "success") {
+  info <- c()
+  for (log in x) {
+   info <- c(info, log[[property]])
+  }
+  return(info)
+}
+
+# Call extract_info() on logs, set property to "timestamp"
+extract_info(logs, property = "timestamp")
+
+# Call extract_info() on logs, set property to "success"
+extract_info(logs, property = "success")

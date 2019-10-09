@@ -1,0 +1,26 @@
+# planets_df is pre-loaded in your workspace
+
+# Select the rings variable from planets_df
+rings_vector <- planets_df$rings
+  
+# Print out rings_vector
+rings_vector
+
+# planets_df and rings_vector are pre-loaded in your workspace
+
+# Adapt the code to select all columns for planets with rings
+planets_df[rings_vector,]
+
+# planets_df is pre-loaded in your workspace
+
+# Select planets with diameter < 1
+subset(planets_df, subset = diameter < 1)
+
+
+# planets_df is pre-loaded in your workspace
+
+# Use order() to create positions
+positions <- order(planets_df$diameter)  
+
+# Use positions to sort planets_df
+planets_df[positions,]

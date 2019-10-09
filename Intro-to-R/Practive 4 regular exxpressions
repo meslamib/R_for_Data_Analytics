@@ -1,0 +1,54 @@
+# Import titanic from csv
+titanic <- read.csv("titanic.csv")
+
+# Call dim on titanic
+dim(titanic)
+
+# Generate histogram of Age column
+hist(titanic$Age)
+
+# titanic is available in your workspace
+
+# Print out total value of fares
+sum(titanic$Fare)
+
+# Print out proportion of passengers that survived
+mean(titanic$Survived)
+
+# Extract the name column from titanic
+pass_names <- titanic$Name
+
+# Create the logical vectror is_man
+is_man <- grepl(pattern = ", Mr\\.", x = pass_names) 
+
+# Count the number of men
+sum(is_man)
+
+# Count number of men based on gender
+sum(titanic$Sex == "male")
+
+
+# Extract the name column from titanic
+pass_names <- titanic$Name
+
+# Create titles
+titles <- gsub(pattern = "^.*, (.*?)\\..*$", "\\1", pass_names)
+
+# Call unique() on titles
+unique(titles)
+
+
+pass_names <- titanic$Name
+titles <- paste(",", c("Mr\\.", "Master", "Don", "Rev", "Dr\\.", "Major", "Sir", "Col", "Capt", "Jonkheer"))
+
+# Finish the vapply() command
+hits <- vapply(titles,
+               FUN = grepl,
+               FUN.VALUE = logical(length(pass_names)),
+               pass_names)
+
+# Calculate the sum() of hits
+sum(hits)
+
+# Count number of men based on gender
+sum(titanic$Sex == "male")

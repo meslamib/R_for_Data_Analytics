@@ -1,0 +1,849 @@
+############################################################################
+###This script is a tool that follows powerpoint examples from the R workshop "Introduction to R"
+########################################################################################
+
+############################################################################
+## Module One - R Basics. ##################################################
+############################################################################
+## R as a Calculator##
+  1+1          #addition
+  1*8          #multiplication
+# R follow the order of operations 
+#(paratheses, exponents, multiply, divide, subtract) This will be calculated as 10+1
+1+5*2    
+
+###Assign an object using <-, 
+example1<-1+3+4*10      # assign  1+3+4*10  to example1
+1+2+3                   #calculations that are not saved to an object disapear
+example1.b<-10+5        # save 10+5 to example1.b
+example1.c <- 5*3
+example1.a <- 1+2+3     #save 1+2+3 to example1.a
+
+## Display and remove objects from the workspace
+ls()                     #list all the objects in the worksapce
+objects()                 #look at all the objects in the workspace
+rm("example1")            #remove objecct example 1 from the workspace
+objects()                 #now relist the objects and example 1 is no longer available
+##you can save the R history
+save.image("name.Rdata")     #saves everything in the workspace including all objects and data to the working directory
+load("name.Rdata")           # loads the workspace back into R
+getwd()                      #displays the pathway to the working directory
+setwd("C:/Users/User/Desktop/R.Workshop")     #sets the working directory to a new directory. 
+#*note You will need to change the pathway to the correct folder on your computer by replacing C:/Users/User/Desktop/R.Workshop with the correct one 
+
+#Math Functions
+x<-10 #place the number 10 into an r object called X
+  log(x) # log base e
+  log10(x) # log base 10
+  exp(x) # e raised to x
+  abs(-x) # absolute value
+  sqrt(x) #square root
+
+#Logicals - or tests of yes/no that return a TRUE or FALSE
+	2 == 3 # Test for equivalence
+	2 != 3 # Test for non-equivalence
+	2 > 3 # Greater than
+	2 < 3 # Less than
+	2 >= 3 # Greater than or equal to
+	2 <= 3 # Less than or equal to
+
+#Trig Functions
+#First, make x a sequence that goes from .1 to 1 by .1
+x <- seq(from = 0.1, to = 1, by = 0.1)       
+#Now check out the different functions
+sin(x) # sine
+cos(x) # cosine
+tan(x) # tangent
+asin(x) # arc-sine
+acos(x) # arc-cosine
+atan(x) # arc-tangent
+pi
+
+########YOUR TURN###########
+############################
+x<-5*4 #x is the product of 5 and 4
+y<-5+5 # y is the sum of 5 and 5
+z<-30-10 # z is the difference between 30 and 10
+objects() #list all the objects in the workspace
+z==x ## Are z and x equal? It should say TRUE
+rm(z) #remove z
+ls() #now when we list the objects z has been been deleted
+Z<-30-10
+
+####Basic Stats
+x <- 1:100 #x is a vector of numbers 1 to 100
+mean(x) # average
+median(x) # median
+var(x) # variance
+sd(x) # standard deviation
+quantile(x) # main quantiles
+max(x) # maximum value
+min(x) # minimum value
+summary(x) # summary statitics
+
+######Packages###
+library(MASS) #load a package into R
+install.packages("RMark") #install a package into R
+library("RMark") #once it is installed you need to load it
+help(package="RMarK") 
+
+# Warnings versus errors
+sqrt(-2) # gives a warning that not a real number was produced
+x <- rnorm(10) #take 10 numbers from a random normal distribution
+y <- rnorm(11) # take 11 numbers from a random normal distribution
+cor(x, y) # gives an error, which indicates theoperation was aborted
+
+
+
+
+
+
+########################################################################
+#### Module two - Data Structure. ######################################
+########################################################################
+
+## Class of data
+x <- c(1, 2, 3, 4, 5) # make a vector with the numbers 1 to 5
+y <- c("A", "B", "C", "D") #make a vector with the first 4 letters of the alphabet
+u <- c(TRUE, FALSE, FALSE, TRUE) #make a vector of TRUE and FALSE values
+class(x) # test to see the data class of x - we find it is numeric
+class(y) #test to see the data class of y - we find it is character
+class(u) #test to see the data class of u - we find it is logical
+X<-10 #put the number 10 into an object called x
+is.numeric(x)   # ask if x is of a particular classs, is it numeric?
+is.character(x) # is it character data?
+is.factor(x)    # is it factor data?
+
+### Try the following commands:
+X<-10
+X+1 # sum X and 1 to get the answer 11
+as.character (X)+1  #treat x as a character versus a number for this command and you get an error
+class(X)           # we have not changed x permenatly
+X=as.character(X)  # change it’s class permanently by reassignment
+class(X)           # now it is no longer a number
+
+##ways to create vectors
+x <- c(1, 2, 3, 4, 5) # a vector of numbers
+y <-c("A", "B", "C", "D")         # a vector of characters
+u <- c(TRUE, FALSE, FALSE, TRUE)  # a vecctor of logicals
+z1 <- seq(from = 1, to = 5, by = 1) # make a sequence from 1 to 5 by 1
+z2<- 1:5 # make a sequence from 1 to 5
+
+ z1==z2  # Test to see if the two z vectors are equivalent. 
+ #Be careful because using only one = will be read as a reassignment
+ 
+ ## Concept chck
+ y<-c(1,2,3,4,5)
+ r <- rep(y, times = 10) #repeat object y 10 times
+ r<-rep("y",times=10) #repeat the letter/character "y" 10 times
+ 
+ ##Sorting data
+ x <- 15:25
+x[3]  # print the third entry in x
+x[5:8]  # the 5th through the 8th entry in x
+x[x > 18] #all values where x is greater than 5
+
+#Concept Check
+X<-c(2,4,3,2,6,8,10)
+X<-c(2,4,3,2,6,8,10)
+X[2]      #second entry in vector X
+X[X==2]    #all entries where X is 2
+
+##Simple commands done on an entire vector
+x <- rep(1, times = 3) #repeat 1 three times and assign it to x
+y <- rep(2, times = 3) # repeat 2 three times and assign it to y
+x + y
+z <- 1:3 #place the numbers 1 to 3 in a vector z
+z*2 # multiply z by 2
+z/3 #divide z by 3
+# Your Turn
+ z<-seq(1,10,.1) # mak a vector from 1 to 10 going by .1
+ class(z)     # check the class of z to make sure it is numeric
+ mean(z)      # take the mean of z
+ z[87]        # get the 87th number
+ z[z>5]       # get all the entries greater than 5
+ 
+ ########## Matricies
+x <- rnorm(25) # take 25 random numbers from the normal distribution
+mat <- matrix(data = x) #places data in x into a [25,1] matrix
+mat <- matrix(data = x, nrow = 5,  ncol = 5)  # places the data x into a 5X5 matrix filling it up column by column
+mat2 <- matrix(data = = x, nrow = 5,  ncol = 5, byrow=TRUE)     # fills a 5X5 matrix by row
+mat3 <- matrix(data = x, nrow = 5, ncol = 5, dimnames = list(c("A", "B", "C", "D", "E"), c("1", "2", "3", "4", "5")))  #dim names are the sames of the rows and columns
+mat.na <- matrix(NA, 10, 10)  # Makes an empty matrix - Used extensively w/loops to store data
+
+x<-1:25 #make a data vector with the numbers 1 to 25
+mat <- matrix(data = x, nrow = 5, ncol = 5,dimnames = list(c("A", "B", "C", "D", "E"), c("1", "2", "3", "4", "5")))
+t(mat) #take the transpose of a matrix (rotate it 90 degrees so rows are the columns, and columns are rows)
+
+##Your Turn
+k1<-rep("NA",10)      #make a vector by repeting NA 10 times           
+k1
+k2<-matrix(k1,10,1)    #creates a column vector
+k2
+k3<-matrix(k1,1,10)    #creates a row vector
+k3
+
+##algebra on matricies
+#First create the matricies
+mat1 <- matrix(1:25, 5, 5)
+mat2 <- matrix(1:25, 5, 5)
+#Then try some math
+mat1 + mat2 #take the pairwise sum of mat1 and mat 2
+mat1 * mat2 #multiply the pairwise entries of mat1 and mat2
+mat1^2 #square every entry in the matrix
+
+##Dimensions are important when doing math on matricies
+mat1 <- matrix(1:20, 5, 4)
+mat2 <- matrix(1:20, 10, 2)
+mat1 + mat2 # This will be an error   "non conformable arrays"
+
+## Your Turn
+v<-1:10 #make a data vector containing the numbers 1 to 10
+m<-matrix(v,10,10) #use this data to make a 10 by 10 matrix
+m[4,7] # find the entry in the 4th row and 7th column
+m[,3]*3 # third column *3
+m[3,]*3 # third row * 3
+
+
+### data frames allow you to have mixed classes in the same R object
+number <- 1:5 #make a vector with the numbers 1 to 5
+weight <- c(1.2, 2.0, 1.1, 1.9, 2.9) #make a vector of weights
+length <- c(25, 29, 26, 24, 30) #make a vector of lengths
+sex <- c("M", "M", "F", "M", "F") #make a vector of gender labels
+dat <- data.frame(number, weight, length, sex) #combine these 4 vectors into a data frame
+class(dat[,1]) #the class of the first column is numeric
+class(dat[,2]) #the class of the second column is numeric
+class(dat[,3]) #the class of the third column is numeric
+class(dat[,4]) #the class of the fourth column is character
+
+### R data sets
+iris
+names(iris)      # all the variables in iris
+iris[1, ]        #the first row of iris
+iris[ ,1:2]       # the firt and second column of iris
+iris$species    #take out all the species values  
+iris[iris$Species == "virginica", ] # all the data where the species is virginica
+iris[iris$Sepal.Length < 5, ]       # all the data where sepal length is less than 5
+subset(iris, Sepal.Length < 5)     # all the data where sepal length is less than 5
+iris[iris$Species == "virginica" & iris$Sepal.Length < 6, ]    # all the data where species is virginica and the sepal length is less than 6
+Sepal.Length       # unless a data set is attached, R cannot read inside of R objects to look at the variable names without you telling it which object to look at (e.g. iris$Sepal.Length)
+attach(iris)       # make the variable names for iris global, attach the column headings to the data entries
+Sepal.Length       #attaching lets you reference variables within objects by making them "global"
+
+
+ ####### CONCEPT CHECK #####
+row17<-iris[17,]      #17th row of iris
+row17$Petal.Width      #petal width of entry in row 17
+mean(Petal.Length)     # mean of all petal lengths
+
+## The next three options all do the same thing and get the petal length of the setosa species
+iris[iris$Species=="setosa",]->setosa
+mean(setosa$Petal.Length)
+##OR
+subset(iris,iris$Species=="setosa")->setosa
+mean(setosa$Petal.Length)
+##or
+mean(iris[iris$Species=="setosa",3])
+
+##LISTS   are a collection of components
+mat <- matrix(1:25, 5, 5) # make a matrix with 5 rows and 5 columns that has the numbers 1 to 25
+number <- 1:5 #put the numbers 1 to 5 in a vector
+sex <- c("M", "M", "F", "M", "F") #but a bunch of gender labels in a vector
+lst <- list(mat, number, sex) #create a list with unnamed components with the 3 R objects
+lst <- list(matrix=mat, numbers=number, gender=sex) # make a list with named components with the three R objects
+lst2 <- list(mat,number, sex)
+##Compare how the lists are different
+lst
+lst2
+
+
+
+
+
+
+###############################################################################################
+####  MODULE 3 - Reading and writing data ####################################################
+###############################################################################################
+##Exporting Data to the working directory
+##Export Iris as a text file
+write.table(iris, file = "iris.txt", row.names = FALSE, sep = " ") #sep is how each data entry should be seperated in the output file, in this case spaces
+##Export Iris as a csv   
+write.table(iris, file = "iris.csv", row.names = FALSE, sep = " ,")
+#or
+write.csv(iris, file = "iris.csv", row.names = FALSE, header=TRUE)
+
+##Read data into R from a csv file. The data must be in your working directory
+dat1 <- read.table(file = "iris.txt", sep = " ", header = TRUE) 
+dat2 <- read.table(file = "iris.csv", sep = ",", header = TRUE)
+dat3 <- read.csv(file = "iris.csv", header = TRUE)
+
+#Read in a data table from a website, in this case oceanographic data
+npgo <- read.table( "http://www.o3d.org/npgo/data/NPGO.txt", header = FALSE)
+
+
+
+
+
+###################################################################
+## Module 4 - Data Manipulation ###################################
+###################################################################
+read.table("mydata.csv",header=TRUE) #bring in the data from the last module
+
+
+### Ordering and Sorting Data
+x <- c(10, 11, 9, 1, 6, 13)
+sort(x)                     # sort X from smallest to largest
+sort(x, decreasing = TRUE)  # sort x from largest to smallest
+order(x)                    # gives the rank position of the entry, ie is it the smallest (1)?
+x[order(x)]         #orders that actual values within X based on their rank
+
+
+#Your turn
+mydata[order(mydata$age), ]       #order our data by age
+mydata[order(mydata$age, mydata$height), ]  #order our data by age and  within each age order it by height
+
+mydata$random <- rnorm(length(mydata[,1]) # add  new column to my data that is a random number from the normal distribution
+Mydata$log_height<- log(mydata$height) # add the log-transformed heights as a new column to your data set - good for people who need transformations to meet assumptions for normality 
+
+
+### Missing Values
+x <- c(2, 3, 4, NA)   #create a vector with a missing value
+mean(x)                  # the mean won't work because there are missing values
+mean(x, na.rm = TRUE)    # na.rm tells R to remove the missing values
+sum(is.na(x))             # counts the number of missing values
+!is.na(x)                # shows what values are not missing
+
+#Concept Check
+X<-c(2, 3, 4, NA, 5, NA, 6)
+is.na(X)                     # shows you where the NA values live
+X[!is.na(X)]                 # takes all the values that are not missing
+
+
+### Merging Data
+grade <-data.frame(name = c("Mike", "Erin", "Joe"), grade = c("A", "C", "B")) #make a data frame with names and grades
+perc <- data.frame(first = c("Mike", "Erin", "Joe"), percent = c(97, 77, 88)) #make a data frame with percents
+merge(grade, perc, by.x = "name", by.y = "first")     # merge these data frames where name in the first object is the same as first in the second object
+
+
+##Looking at pieces of data
+head () # see the first few rows data
+tail () # see last few rows of data
+names() # see variables
+dim () # see the dimensions of your data
+length()#how long something is (ie # of entries)
+
+##Your turn
+names(mydata)                # look to see variable names
+head(mydata)                 #look at the first row of data
+mean(mydata[mydata$rgroup=="fish",7] # take the mean of the 7th column for all entries where  the reserach group is fish
+
+### Your Turn
+read.csv("mydata3.csv")->mydata3
+mean(mydata3$C,na.rm=TRUE)
+mydata3[order(mydata3$D), ]
+mydata3$D<-seq(from=2, to=8, by=2)     #note we need to go to 20 so we get all 10 numbers, skipping by 2 means we leave every other number out
+
+
+
+
+###############################################################################
+### Module 5: Data Summaries and Apply Functions ##############################
+###############################################################################
+
+## apply a function (in this case sum) to a matrix
+mat <- matrix(1:25, nrow = 5, ncol = 5)
+apply(mat, 1, sum) # apply the sum to each rom - by rows is indicated by the 1
+apply(mat, 2, sum) # apply the sum by columns - by columns is indicated by the 2
+apply(iris[, 1:4], 2, mean) # apply the mean to each column in columns 1, 2, 3, and 4
+ ### apply a function to a list, where the index is independent (ie a different component) from what the sum is working on (the numbers [[1]])
+ dat <- list(c(1, 2, 3, 4, 5), c("Red", "Red",  "Red", "Blue", "Blue")) # make a list with numbers and colors
+ tapply(dat[[1]], dat[[2]], sum) # count how many reds and blues there are
+
+#you try
+tapply(mydata$age,mydata$depart,mean) #find themean age by research group
+tapply(mydata$height,mydata$depart,median) # find the median height by research group
+
+## the by function
+attach(iris)
+# using data iris go by species and fit a linear model of sepal length and width. x =iris data
+by(iris, Species, function(x) lm(Sepal.Length ~ Sepal.Width, data = x))     
+
+## The plyr paradigm
+##Load the plry package from the library
+library(plyr)
+#find the mean sepal length by species
+ddply(iris,"Species",summarize, mean_sepal= mean(Sepal.Length))
+#find the mean sepal length and mean petal length by species
+ddply(iris,"Species",summarize, mean_sepal= mean(Sepal.Length),mean_petal=mean(Petal.Length)
+#############################################
+
+
+
+############################################################################
+## Module 6: Basic Plotting in R ##########################################
+#############################################################################
+x <- 1:100            #save the numbers from one to 100 in an object called x
+y <- rnorm(100)       # take a random sampling from the normal distribution of 100 numbers and save them in an object called y
+plot(x, y)            # plot x and y
+plot(y ~ x)           # plot x and y - note here the order is response variable ~ explanatory variable whereas when they are seperated via commas it is the opposite
+help(par)           # shows different graphing options
+
+
+
+attach(iris)
+plot(iris)
+par(mfrow=c(2,3))            #divides graphical window into 2 rows and three columns to display many graphs
+plot(iris$Sepal.Length)      # plot single numeric data
+plot(iris$Species)           # plot single factor
+plot(iris$Sepal.Length, iris$Species) #one numeric and one factor
+plot(iris$Sepal.Length, iris$Petal.Length)    #plot two numerics
+plot(iris$Species,iris$Sepal.Length)          #plot factor and numeric
+plot(iris$Species,iris$Sepal.Length)
+
+x<-c(1,2,3,4,5,6)                                   
+y<-c(7,8,9,10,11,12)
+par(mfrow=c(2,2))    # format the plotting window to display graphs in a matrix with 2 rows and 2 columns
+plot(x, y, pch=1, main="my graph", cex=1)
+plot(x, y, pch=3, main="my graph", cex=3)  # make te points larger by a facotor of 3
+plot(x, y, type="l", lwd=1, main="my graph")  # make the points a line 
+plot(x, y, type="l", lwd=3, main="my graph", cex=3)   #make the line thicker by a factor of 3
+
+##Plotting the iris data
+#default plot
+plot(Sepal.Length, Sepal.Width)
+#Adding a title and axis labels
+plot(Sepal.Length, Sepal.Width,main="Sepal Data",xlab="Lengths",ylab="Widths")
+# change the y axis
+plot(Sepal.Length, Sepal.Width,main="Sepal Data",ylim=c(0,6), xlab="Lengths",ylab="Widths")  
+#change the x axis
+plot(Sepal.Length, Sepal.Width,main="Sepal Data",ylim=c(0,6),xlim=c(3,9), xlab="Lengths",ylab="Widths") 
+#add a reference line for the mean sepal width that is red                             
+abline(h=mean(Sepal.Width),col="red")  
+#add a reference line for the mean sepal length
+abline(v=mean(Sepal.Length),col="blue")                                                                     
+# make the sepeal width line thicker
+abline(h=mean(Sepal.Width),col="red",lwd=1.5) 
+ # add a fitted line to the data   
+abline(lm(Sepal.Width~Sepal.Length),col="green")
+# color the points by species
+plot(Sepal.Length, Sepal.Width,,main="sepal data",ylim=c(0,6), xlab="lengths", ylab="widths", col=Species)      
+
+###Legends
+# add a legend at the coordinates(6.5,1) with the species names, making the symbol a circle, and the colors red blue and green 
+legend(x = 6.5, y = 1, c("setosa","versicolor", "virginica"),pch=c(1,1,1),col=c(1,2,3),bty = "n",cex = 0.9)
+# add a legend at the coordinates(6.5,1) with the species names, making the symbol a circle, the font italic, and the colors red blue and green 
+legend(x = 6.5, y = 1, c("setosa","versicolor", "virginica"),par(pch=c(1,1,1),font=c(3,3,3),col=c(1,2,3)),bty = "n",cex = 0.9)  
+## Alternative way to get names for legend
+unique(species)->names    # save the unique values in species and put them in the object called names
+legend(x = 6.5, y = 1, names,font=c(3,3,3),col=c(1,2,3),bty = "n",cex = 0.9)
+
+## Differentiating the species in the graph by adding points
+#subset the iris data so all of the setosa species is in the object species one
+iris[iris$Species=="setosa",]->species1  
+ # subset iris species virginica to species 2                                        
+iris[iris$Species=="virginica",]->species2           
+#plot the setosa species                            
+plot(species1$Sepal.Length,species1$Sepal.Width,col="blue")   
+# add points to the existing plot (ie the virginica species)
+points(species2$Sepal.Length,species2$Sepal.Width, col="red")                      
+
+
+## Your turn - use my data
+objects()# check to see if mydata is still there from yesterday
+getwd()
+mydata<-read.csv("mydata.csv")
+mydata #double check data when you read it in
+#plot the age and height data and turn the axis labels (las=1), giving the graph its own title
+plot(mydata$age,mydata$height,col=mydata$depart,las=1,main="my data example")
+#add a reference line for the median height
+abline(h=median(mydata$height))
+#add a reference line for the median age
+abline(v=median(mydata$age))
+##add a legend at the coordinates 25 173 with the departments as labels, the symbol the first plotting character each colored by the first three colors and do not put a box around it
+legend(25,173,c("rem","com","edu"),pch=c(1,1,1),col=c(1,2,3),bty="n")
+
+ ## Adding text to a plot
+ x<-c(1,2,4,5,6)
+ y<-c(10,13,12,15,16)
+ plot(x,y)
+ abline(lm(y~x))
+ # paste the numeric value of the correlation coefficiant to the plot at the coordinates (4,11)
+ text(4,11,paste(cor(x,y)))  
+ # same as above but round it to 3 decimal places
+ text(4,10.5,paste(round(cor(x,y),3)))   
+ # now put the phrase of what it is on the graph
+ text(4,12,"Correlation Coefficient", col="red", font=3)     
+ # now do it all in one step by pasting together the phrase, which is in quotes, and the number, which is not in quotes
+ text(3,14,paste("Correlation Coefficient",round(cor(x,y),3))) 
+
+ #Your turn 
+ x<-c(1,2,4,5,6)
+ y<-c(10,13,12,15,16)
+ plot(x,y, main="Line of X and Y", xlab="x", ylab="y")
+ abline(lm(y~x))
+text(3,14,paste("mean of x:",mean(x), sep="    "))
+## Bomus - use expression to add symbol for mu
+text(26,176, "This is an example \n of using enter in r")
+test<-paste(mean(x))
+text(3,13, text(3,13,expression(paste("Bonus ", mu )),cex=1))
+
+## GGplot, a very basic introduction
+# start a plot. ggplot ONLY uses data frames.
+newplot <- ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))+
+ggtitle("Sepal Width vs Sepal Length")+
+xlab("Length")+ylab("width")+
+geom_point()
+ newplot
+
+newplot
+# separate colors by categorical or continuous variables
+newplot <- ggplot(data=iris,aes(x=Sepal.Length, y=Sepal.Width, color=Species))+
+ggtitle("Sepal Width vs Sepal Length")+
+xlab("Length")+ylab("width")+
+   geom_point(size=4)
+newplot
+
+newplot <- ggplot(data=iris,aes(x=Sepal.Length, y=Sepal.Width, color=Species))+
+ggtitle("Sepal Width vs Sepal Length")+
+xlab("Length")+ylab("width")+
+   geom_point(size=1)
+newplot
+
+newplot <- ggplot(data=iris,aes(x=Sepal.Length, y=Sepal.Width, color=Species))+
+ggtitle("Sepal Width vs Sepal Length")+
+xlab("Length")+ylab("width")+
+   geom_point(size=1, shape=6)+
+    theme(legend.position="top")
+newplot
+
+
+
+#####################################################################################
+## Module 7 - Statistical  Tests ####################################################
+#####################################################################################
+
+mtcars<-mtcars
+head(mtcars)                       # find the names in the dataset
+plot(mtcars$mpg ~ mtcars$hp)       # make mpg the response variable and hp the explanatory
+cor(mtcars$mpg, mtcars$hp)         # find the correlation coefficiant
+fit1 <- lm(mpg ~ hp, data = mtcars)       # fit the data using a linear model
+fit1
+summary(fit1)              #get the statistics from out fitted 
+plot(mtcars$mpg ~ mtcars$hp)      #plot the data
+plot(mtcars$mpg ~ mtcars$hp)
+names(fit1)             # see what statistics are saved
+fit1$residuals           #extract the residuals
+fit1$coefficients        #extract the coefficants
+fit.sum <- summary(fit1) #save the summary
+names(fit.sum)
+fit.sum$r.squared
+plot(fit1)# series of quantile and fitted plots. Go into the R console and hit enter to scroll through all of them
+coef(fit1)#extract the coefficients
+residuals(fit1) #extract residuals
+fitted(fit1) #get fitted values
+vcov(fit1) # variance and covariance
+confint(fit1)# confidenceinterval for parameters
+hist(resid(fit1), col = 1, las = 1, main = "Histogram of Residuals", xlab = "Residuals")
+
+fit2 <- lm(mpg ~ hp + disp, data = mtcars)
+summary(fit2)
+
+## Compare three models using AIC
+fit1 <- lm(mpg ~ hp, data = mtcars) # fit a model with horsepower as the only explanatory variable
+fit2 <- lm(mpg ~ disp, data = mtcars) # fit a model with display as the only explanatory variable
+fit3 <- lm(mpg ~ hp + disp, data = mtcars) # fit a model with horsepower and display as the only explanatory variable
+AIC(fit1, fit2, fit3) # compare the AIC scores of all the methods
+
+
+
+#####################################################################################
+## Module 8 - Loops #################################################################
+#####################################################################################
+
+## R will overwrite anything in a loop that isn't saved. If you open y after running the loop
+## you'll find nothing is saved
+X<-c(1,2,3,4)
+for(i in 1:3)
+   {
+     print(paste("Xi is",X[i]))    #print the value of x each time we go through the loop
+     10-X[i]->y                    #subtract the current value of X  which is the ith position of X from 10
+     print(paste("y is",y) )       #print this value with the description "y is"
+    }
+y                                # open y after the loop - nothing was saved!
+ # To correct for this, you must add a blank vector as storage space
+## for the results the loop is creating
+x<-c(1,2,3,4)
+y<-rep(NA,length(x))         #make a storage space to put the values of y
+for(i in 1:4) 
+{
+  print(paste("Xi is",x[i]))
+  10-x[i]->y[i]               # put the answer into the ith position of the storage vector y
+  print(y)                    # watch the y vector fill up
+}
+y                            # now all the y values are being saved!
+
+## Here is another example that fills up a matrix by repeating the index K and placing it in the 
+## kth row of the matrix:
+mat <- matrix(NA, 10, 10)  # Create a matrix for storage
+    for (k in 1:10)  #for each number between 1 and 10
+    {       
+    x<-rep(k, times = 10) #repeat the index 10 times and assign it to x
+    mat[,k] <- x    # place vector x in the first column of X
+   }
+
+### Concept check - now we can modify it by placing the comma on the
+## other side of the k to make it fill up by row. We are now repeating the sum
+mat <- matrix(NA, 10, 10)  # Create a matrix for storage
+    for (k in 1:10)  #for each number between 1 and 10
+    {       
+    x<-rep(k+3, times = 10) #repeat the index plus 3 10 times and assign it to x
+    mat[k,] <- x    # place vector x in the first ROW of X
+   }
+
+## We can use if/else statements to only perform operations on specific
+## variables. These require logicals. In this case we are asking the loop
+## to do something only if the index is FALSE
+
+letters<-c("J","G","O","O","B","O","!","D")     # make a vector of letters
+index<-rep(c(TRUE,FALSE),4)                     #make an index
+for(i in 1:8) {
+    if (index[i]==FALSE)  print(letters[i])     # if the index is FALSE, then print the letter in the ith position of letters
+     }
+
+### Concept Check####
+# We could also ask it to print something only if the index was true
+letters<-c("J","G","O","O","B","O","!","D")
+index<-rep(c(TRUE,FALSE),4)
+for(i in 1:8) {
+  if (index[i]==TRUE)  print(letters[i])       #if the index is true, print the ith letter in the index
+  }
+
+## We can also index on previous commands within a loop
+ results<-matrix(NA, nrow=5,ncol=3)
+ results[1,]=seq(1:3)                   #aasign the first row of results to the numbers 1 2 3
+ results
+ for (i in 2:5)                        #start at 2 and go to 5
+  {
+     results[i,]<-2*results[i-1,]      # take the previous row of a results (i-1) and multiply it by 2, then save this as row i
+  }
+ 
+ ## Example using the baby names data set
+ ## Step two: Read in the data, which is the top 3 male and female baby names in 2014, 2004, 1994, and 1984
+baby_names<-read.csv("baby.csv")
+#Check the class of your new object
+  class(baby_names)
+  #First, see the current data-type for name:
+ class(baby_names$name)
+ ## We need characters, so we must change this column of data from "factor" to "character
+ baby_names$name=as.character(baby_names$name)
+ #always recheck
+ class(baby_names$name)
+## The first step in a loop is to develop the index, which tells R how many times to run the loop
+## If we want it to run over all the baby names we need to know how many there are.
+## We have two options: 
+ nrow(baby_names) # how many rows are in our data frame? 
+ length(baby_names$name) # more directly, how many baby names are there?
+# Ourloop will start by asking for each number from 1 to the total number of baby names:
+for (i in 1:nrow(baby_names))
+# notice if you run the code there is a  "+" indicating you didn't finish the last command. R is waiting 
+# for the rest of the loop
+  { #curly brackets indicate the start of where the loop will cycle 
+  nchar(baby_names$name[i]) # this line says count the letters in the ith baby name
+  } # this goes back to the top and changes i by 1. It will keep running until i = nrow(baby_names)
+
+# Why didn't anything happen when we ran this code? 
+# Loops require an object to store the results.
+# In a data frame we can store them directly back to the data set using the $ symbol
+
+# We'll add a line assigning where the number of characters should go by first creating an empty vector.
+  letters<-rep(NA,nrow(baby_names))
+  for (i in 1:nrow(baby_names))
+  { 
+  letters<-nchar(baby_names$name[i]) # this line says count the letters in the ith baby name
+  } 
+letters 
+#What happened? We only have the letter count for the last name the loop ran through?
+
+## We were missing an index. Try again adding which row the nchar variable needs to go to.
+  for (i in 1:nrow(baby_names))
+  { 
+  letters[i]<-nchar(baby_names$name[i]) # this line says count the letters in the ith baby name
+  } 
+letters
+
+
+## Example: Plotting loop for iris data
+## This loop goes through the different measures and makes a histogram across all species
+par(mfrow=c(2,2)) # set up 4 plotting windows on the same screen
+for(i in 1:4) {  ## for each of 4 measurements
+hist(iris[, i], col = "slategrey", #make a histogram of the measurement in column "i" in the color "slate gray"
+main = names(iris[i]),  #tittle the graph with the column tittle
+xlab = names(iris[i]), ylab = "Freq",las=1) #label the exaxis with the value of the column tittle and make the ylab freq, turn the yaxis labels
+}
+
+## Concept Check
+## Now we'll paste in the mean measurement to the tittle after rounding it to 3 decimal places and add a line
+par(mfrow=c(2,2))
+for(i in 1:4) {
+hist(iris[, i], col = i, 
+main = names(iris[i]),  
+xlab = names(iris[i]), ylab = "Freq",las=1) 
+abline(v=median(iris[,i])) #this will add a line at the mean of the ith iris variable
+}
+
+## Fixing broken code:
+x<-c(1,2,5,3,1,2,12)
+y<-rep(NA, length(x))
+
+for (i in 1:length(x))
+{
+ b<-x^2-4
+ a<-(b-3
+ c<-a+b
+ sqrt(c)->y[i]
+}
+## What happened?
+#try running it line by line by assigning a value to i outside the loop until the problem occurs
+i<-1
+b<-x^2-4
+a<-(b-3
+# now we see a + versus a > so there is a problem
+# fix it and try again:
+  x<-c(1,2,5,3,1,2,12)
+y<-rep(NA, length(x))
+for (i in 1:length(x))
+{
+ b<-x^2-4
+ a<-(b-3)
+ c<-a+b
+ sqrt(c)->y[i]
+}
+## Still we see an error,so try another technique - the print function to see what R thinks a specific value is
+## during each loop itteration
+x<-c(1,2,5,3,1,2,12)
+ y<-rep(NA, length(x))
+ for (i in 1:length(x))
+ { print(paste("on loop",i))  #added the print function
+  b<-x^2-4
+  a<-(b-3)
+  c<-a+b
+  sqrt(c)->y[i]
+}
+## We're getting a vector versus a value because we forgot to index
+> x<-c(1,2,5,3,1,2,12)
+> y<-rep(NA, length(x))
+> for (i in 1:length(x))
+> { print(paste("on loop",i))      
+  b<-x[i]^2-4  # Added the index
+  a<-(b-3)
+  c<-a+b
+  sqrt(c)->y[i]
+}
+## we can also use a browser which will break the loop so we can see the objects within the loop for each itteration
+x<-c(1,2,5,3,1,2,12)
+y<-rep(NA, length(x))
+for (i in 1:length(x))
+{
+ b<-x[i]^2-4
+ a<-(b-3)
+ c<-a+b
+browser()  ## Browser added - check to see what a, b, and c are at each step, you'll find one time we get a negative c
+ sqrt(c)->y[i]
+}
+
+
+
+
+###################################################################################### 
+##   Module 9 - Functions  #############################################################
+######################################################################################
+# EXAMPLE ONE: Make a function that takes the square of the number
+   square<-function(x) {    # We need to store our function in an object to run, so our function will be called square. It will take one argument, x, which has no default, meaning x must be supplied each time the function is run.
+   answer<-x*x              # we will take the value of x supplied and perform the operation x multiplied by x and save it in an object called answer
+   return(x)                # The function will return the answer when we run the function 
+   }
+
+   square(x=2)              # After we write the function, we need to run it in the command line. Here we are asking it to take the square of 2
+                            # note that if we type square() nothing will happen because we have not supplied the needed argument x
+
+  # To modify our example, we can add default arguments which will allow the function to run without having to suppply a value for x. 
+  # If we supply a value for x, the default is overridden
+  square <- function(x=4) {
+  answer <- x * x
+  return(answer)
+        }
+  square()       # defaults to assuming x is 4
+  square(x=2)     # assumes x=2
+  # If a function is not working, you can use a browser to interrupt your function for trouble shooting (> browser()) . To quit a browser type > Q
+##################################################################################################################################################
+# Example 2: Write a function to standardize a variable between 0 and 1, then apply it to the iris data
+stnd.norm <- function(x, na.rm = TRUE) # the function name is square and requires data set X
+{
+ avg <- mean(x, na.rm = na.rm)  #takes the average of the data set
+ stdev <- sd(x, na.rm = na.rm) # takes the standard deviation of x
+ stnd <- ((x - avg)/stdev) # standardizes the data
+ return(stnd)
+  }
+#To run the Function:
+x <- 1:10
+stnd.norm(x)
+stnd.norm(x=iris$Petal.width)
+
+
+# EXAMPLE TWO: Write a function that will find the volume AND surface area of a perfectly square cube given the length of one side
+  cube_facts<-function (s) {                 # we wil call the function cube_facts and it will have a default argument of s
+  surface_area<-6*2^2                        # take the surface area of the cube and store it in the object surface_area
+  volume<-s^3                                # take the volume of the cube
+  return(list(SA=surface_area, Vol=volume))  # return both the surface area and the volume as a list
+     }
+
+    cube_facts(s=2)                            # run the function
+ 
+ # Often Warnings or errors are good to incorporate in functions. For instance, if you took the surface area of a negative measurement, the square would
+ # make it positive and you may not realize you have unrealalistic data. Now, we will modify the code to include a warning term
+  cube_facts<-function (s=3) {                                    # we wil call the function cube_facts and it will have a default argument of s=3
+  if(s<0) stop("You have a negative length measurement")   # if the side measurement is less then 0, print the warning label in quotes
+  if(s<1) warning ("You have a small length measurement") #add warning about length of side
+  surface_area<-6*2^2                                         # take the surface area of the cube and store it in the object surface_area
+  volume<-s^3                                                 # take the volume of the cube
+  return(list(SA=surface_area, Vol=volume))                   # return both the surface area and the volume as a list
+     }
+
+    cube_facts(s=-2) #see if the error works 
+    cube_facts(s=.5) #see if the warning works
+
+
+##################################################################################################################################################
+# Bonus simulation code not covered in powerpoint
+#Write a function that takes the means and standard deviations of a user-defined number of randomly generated samples. The 
+ # user should be able to define the number of samples generated, the sample size of each individual sample, the mean of the normal distribution
+ # the sample is taken from, and the standard deviation of the distribution the sample is randomly generated from.
+    
+    sample_sims<-function(mean=0, sd=1, sample_size=100, number_samples=10)  # Our function will be called sample sims and has 4 arguments (the pop mean, which will default to 0, the pop standard deviation, defaulted to 0, the sample size of each individual sample (100), and the total number of samples taken (10).
+    { sample_results<-matrix(NA,nrow=number_samples,ncol=2)                  # Create storage space for each sample's mean and standard deviation, we make the number of rows the same as the number of samples versus and actual number because the size of the storage space will change depending on how the user defines the original arguments.
+    colnames(sample_results)=c("mean","SD")                                # Put column headings on your storage matrix
+    for (i in 1:number_samples)                                          # for each individual sample, up until the total number of samples is reached
+        { data<-rnorm(sample_size, mean=mean, sd=sd)                       # make a data set by sampling from the normal distribution with the specified mean and SD until a sample of size samplesize is reached. 
+        sample_results[i,1]<-mean(data)                                  # take the mean of this data and put it in the first column ith row of our storage matrix
+        sample_results[i,2]<-sd(data)                                    # take the standard deviation of this data and put it in the first column ith row of our storage matrix
+         }                                                                 # Go back and to the top of the loop and make a new set of data
+          #browser()
+    return(sample_results)                                                   # return the sample_results the function was designed to create
+    }
+ 
+
+sample_sims()                                     # run the function based on default arguments
+sample_sims(sd=10)                                # change the standard deviation of the underlying population to 10
+sample_sims(0,10,100,10)                          # if you supply all the arguments in the correct order, you do not need to use labels as to what the inputs are. 
+plotting_data<-sample_sims(number_samples=500)    # save the result for later analysis, such as plotting
+hist(plotting_data[,1],xlab="Sample Means", las=1, main="Example 3 - Sample Means \n R Workshop Mod 9") # plot the sample means our function generated
+
+
+
+
+
+
+
+
+
+

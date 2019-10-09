@@ -1,0 +1,53 @@
+# logs is available in your workspace
+
+# Call length() on each element of logs
+lapply(logs, length)
+
+# Call class() on each element of logs
+lapply(logs, class)
+
+# logs is available in your workspace
+
+# Define get_timestamp()
+get_timestamp <- function(x) {
+ return(x$timestamp) 
+}
+
+# Apply get_timestamp() over all elements in logs
+lapply(logs,get_timestamp) 
+
+
+# logs is available in your workspace
+
+#get_timestamp <- function(x) {
+#  x$timestamp
+#}
+
+# Have lapply() use an anonymous function
+lapply(logs, function(x) {x$timestamp})
+
+
+# logs is available in your workspace
+
+# Call length() on each element of logs using sapply()
+sapply(logs, length)
+
+# Definition of get_timestamp
+get_timestamp <- function(x) {
+  x$timestamp
+}
+
+# Get vector of log entries' timestamps
+sapply(logs, get_timestamp)
+
+
+# logs is available in your workspace
+
+# Use sapply() to select the success element from each log: results
+results <- sapply(logs, `[[`, "success")
+
+# Call mean() on results
+mean(results)
+
+# Use sapply() to select the details element from each log
+sapply(logs, `[[`, "details")
